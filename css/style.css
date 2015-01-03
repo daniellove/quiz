@@ -11,7 +11,8 @@ p {
 }
 
 section,
-#wrapper {
+#wrapper,
+#minigame {
 	width: 50rem;
 }
 
@@ -36,12 +37,12 @@ section {
 
 /* quiz main */
 
-#qc {
+#quizContainer {
 	height: 20rem;
 	position: relative;
 }
 
-#qc > div {
+#quizContainer > div {
 	position: absolute;
 }
 
@@ -54,32 +55,45 @@ section {
 	height: 10rem;
 }
 
-#examples {
-	height: 20rem;
-	right: 4px;
+#examples,
+.exampleImage {
+	width: 20rem;
+	right: 2rem;
 }
 
-#prog,
+.exampleImage {
+	border-style: solid;
+	border-color: #fbffe6;
+	border-width: 1px;
+	border-radius: 10px;
+}
+
+#progress,
 #submit {
 	height: 7rem;
 }
 
-#prog,
+#progress,
 #submit {
-	bottom: 0;
+	bottom: 2rem;
 }
 
-#prog {
+#progress {
 	width: 12rem;
 }
 
 #submit {
 /*	width: 7rem; */
-	left: 16rem;
+	left: 15rem;
+}
+
+#submit img {
+	height: 7rem;
+	cursor: pointer;
+	cursor: hand;
 }
 
 /* minigame */
-
 
 #minigame {
 	height: 6rem;
@@ -89,12 +103,16 @@ section {
 
 #minigame > div {
 	position: absolute;
-	width: 338px;
-	height: 95px;
+	width: 20rem;
+	height: 5.5rem;
+}
+
+#myCard {
+	left: 2rem;
 }
 
 #oppCard {
-	right: 0;
+	right: 2rem;
 }
 
 /* content */
@@ -122,6 +140,7 @@ h3 {
 
 #options > div {
 	padding: 0.6rem;
+	margin-left: 2rem;
 }
 
 #options label {
@@ -129,34 +148,15 @@ h3 {
 	line-height: 0;
 }
 
-#prog .content {
+#progress .content {
 	margin: 1rem;
 	text-align: center;
 }
 
-#prog .content h2 {
+#progress .content h2 {
 	padding-bottom: 1rem;
-}
-
-/* images */
-
-#submit img {
-	height: 7rem;
-	cursor: pointer;
-	cursor: hand;
 }
 
 .card {
 	width: 4rem;
 }
-
-.e-img {
-	height: 20rem;
-	position: center;
-	border-style: solid;
-	border-color: #fbffe6;
-	border-width: 1px;
-	border-radius: 10px;
-}
-
-
