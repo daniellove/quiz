@@ -21,14 +21,17 @@ var clickButton = function() {
 
 var myCard = function() {
 	if (prompt()) {
-		$("#cp" + n).remove();
-		$("#myCard").prepend('<img src="img/correct/' + x + '.png" alt="correct" id="cp' + x + '" class="card">')
+		cardChange(x, "correct");
 		x++;
 	} else {
-		$("#cp" + n).remove();
-		$("#myCard").prepend('<img src="img/incorrect/' + y + '.png" alt="incorrect" id="cp' + y + '" class="card">')
-		y++;
+		cardChange(y, "incorrect");
+		y++
 	}
+}
+
+function cardChange (variable, alt) {
+	$("#cp" + n).remove();
+	$("#myCard").prepend('<img src="img/' + alt + '/' + variable + '.png" alt="' + alt + '" id="cp' + variable + '" class="card">');
 }
 
 var resetQuiz = function() {
