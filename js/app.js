@@ -1,10 +1,11 @@
 $(document).on('ready', function() {
-	clickButton();
-});
-
 var	n = 1,
 	x = 1,
 	y = 1;
+
+	resetQuiz();
+	clickButton();
+});
 
 var clickButton = function() {
 	$("#submit").on("mousedown", function() {
@@ -12,6 +13,7 @@ var clickButton = function() {
 			$("#q-no").text("Question " + n + ":");
 			$("#p-no").text(n + " of 5");
 			myCard();
+			oppCard();
 			n++;
 		} else {
 			resetQuiz()
@@ -20,18 +22,22 @@ var clickButton = function() {
 }
 
 var myCard = function() {
-	if (prompt()) {
-		cardChange(x, "correct");
+	if (true) {
+		cardChange("#myCard", x, "correct");
 		x++;
 	} else {
-		cardChange(y, "incorrect");
+		cardChange("#myCard", y, "incorrect");
 		y++
 	}
 }
 
-function cardChange (variable, alt) {
+var oppCard = function() {
+	cardChange("#oppCard", n, "opponent");
+}
+
+function cardChange (node, variable, alt) {
 	$("#cp" + n).remove();
-	$("#myCard").prepend('<img src="img/' + alt + '/' + variable + '.png" alt="' + alt + '" id="cp' + variable + '" class="card">');
+	$(node).prepend('<img src="img/' + alt + '/' + variable + '.png" alt="' + alt + '" class="card">');
 }
 
 var resetQuiz = function() {
@@ -41,8 +47,13 @@ var resetQuiz = function() {
 
 	$("#q-no").text("Questions");
 	$("#p-no").text("0 of 5");
-	$("#myCard").children().remove();
-	for (var i = 1; i <= 5; i++) {
-		$("#myCard").append('<img src="img/ph.png" alt="placeholder" id="cp' + i + '" class="card">')
-	};
+	cardReset("#myCard");
+	cardReset("#oppCard");
 }
+
+var cardReset = function(node) {
+	$(node).children().remove();
+	for (var i = 1; i <= 5; i++) {
+		$(node).append('<img src="img/ph.png" alt="placeholder" id="cp' + i + '" class="card">');
+	};
+};
