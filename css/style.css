@@ -5,38 +5,61 @@ div {
 	position: absolute;
 }
 
+#wrapper,
+#title {
+	width: 800px;
+}
+
 #wrapper {
 	height: 600px;
 	margin: 100px auto;
 	position: relative;
 }
 
-#wrapper,
-#title {
-	width: 800px;
-}
-
 #title {
 	height: 70px;
+}
+
+#questions,
+#counter {
+	top: 100px;
 }
 
 #questions {
 	height: 120px;
 	width: 620px;
-	top: 100px;
+}
+
+#counter {
+	height: 500px;
+	width: 150px;
+	right: 0;
+}
+
+#options,
+#examples {
+	top: 250px;
 }
 
 #options {
 	height: 250px;
 	width: 240px;
-	top: 250px;
+}
+
+#examples {
+	height: 350px;
+	width: 350px;
+	right: 180px;
 }
 
 #prog,
 #submit {
 	height: 72px;
-	width: 138px;
 	bottom: 0;
+}
+
+#prog {
+	width: 138px;
 }
 
 #submit {
@@ -44,16 +67,5 @@ div {
 	left: 168px;
 }
 
-#examples {
-	height: 350px;
-	width: 350px;
-	bottom: 0;
-	right: 180px;
-}
 
-#counter {
-	height: 500px;
-	width: 150px;
-	bottom: 0;
-	right: 0;
-}
+
