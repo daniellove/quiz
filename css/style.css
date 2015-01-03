@@ -1,0 +1,59 @@
+div {
+	border-style: dashed;
+	border-width: 1px;
+	border-color: grey;
+	position: absolute;
+}
+
+#wrapper {
+	height: 600px;
+	margin: 100px auto;
+	position: relative;
+}
+
+#wrapper,
+#title {
+	width: 800px;
+}
+
+#title {
+	height: 70px;
+}
+
+#questions {
+	height: 120px;
+	width: 620px;
+	top: 100px;
+}
+
+#options {
+	height: 250px;
+	width: 240px;
+	top: 250px;
+}
+
+#prog,
+#submit {
+	height: 72px;
+	width: 138px;
+	bottom: 0;
+}
+
+#submit {
+	width: 72px;
+	left: 168px;
+}
+
+#examples {
+	height: 350px;
+	width: 350px;
+	bottom: 0;
+	right: 180px;
+}
+
+#counter {
+	height: 500px;
+	width: 150px;
+	bottom: 0;
+	right: 0;
+}
