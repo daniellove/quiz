@@ -5,10 +5,14 @@ div {
 	position: absolute;
 }
 
+img {
+	height: 100px;
+}
+
 #wrapper,
 #title,
 #questions {
-	width: 600px;
+	width: 800px;
 }
 
 #wrapper {
@@ -31,10 +35,8 @@ div {
 	top: 200px;
 }
 
-#options,
-#counter,
-#hand {
-	width: 270px;
+#options {
+	width: 370px;
 }
 
 #options {
@@ -43,8 +45,8 @@ div {
 
 #examples {
 	height: 270px;
-	width: 300px;
-	left: 300px;
+	width: 400px;
+	left: 400px;
 }
 
 #prog,
@@ -64,6 +66,7 @@ div {
 
 #counter,
 #hand {
+	width: 372px;
 	height: 100px;
 	bottom: 0;
 }
