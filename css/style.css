@@ -7,8 +7,7 @@ div {
 
 #wrapper,
 #title,
-#questions,
-#counter {
+#questions {
 	width: 600px;
 }
 
@@ -32,9 +31,14 @@ div {
 	top: 200px;
 }
 
+#options,
+#counter,
+#hand {
+	width: 270px;
+}
+
 #options {
 	height: 170px;
-	width: 270px;
 }
 
 #examples {
@@ -58,9 +62,14 @@ div {
 	left: 198px;
 }
 
-#counter {
+#counter,
+#hand {
 	height: 100px;
 	bottom: 0;
+}
+
+#hand {
+	right: 0;
 }
 
 
