@@ -5,10 +5,6 @@ div {
 	position: absolute;
 }
 
-img {
-	height: 100px;
-}
-
 #wrapper,
 #title,
 #questions {
@@ -45,13 +41,17 @@ img {
 
 #examples {
 	height: 270px;
-	width: 400px;
-	left: 400px;
+	width: 370px;
+	right: 0;
 }
 
 #prog,
-#submit {
+#submit,
+#submit img {
 	height: 72px;
+}
+#prog,
+#submit {
 	top: 400px;
 }
 
@@ -61,7 +61,12 @@ img {
 
 #submit {
 	width: 72px;
-	left: 198px;
+	left: 298px;
+}
+
+#submit img {
+	cursor: pointer;
+	cursor: hand;
 }
 
 #counter,
@@ -75,5 +80,6 @@ img {
 	right: 0;
 }
 
-
-
+.card {
+	height: 100px;
+}
