@@ -3,83 +3,116 @@ div {
 	border-width: 1px;
 	border-color: grey;
 	position: absolute;
+	font-family: 'Lobster', cursive;
 }
+
+/* div layout */
 
 #wrapper,
 #title,
 #questions {
-	width: 800px;
+	width: 50rem;
 }
 
 #wrapper {
-	height: 600px;
-	margin: 100px auto;
+	height: 40rem;
+	margin: 4rem auto;
 	position: relative;
 }
 
 #title {
-	height: 70px;
+	height: 4rem;
 }
 
 #questions {
-	height: 70px;
-	top: 100px;
+	height: 4rem;
+	top: 6rem;
 }
 
 #options,
 #examples {
-	top: 200px;
+	top: 12rem;
 }
 
 #options {
-	width: 370px;
-}
-
-#options {
-	height: 170px;
+	height: 11rem;
+	width: 23rem;
 }
 
 #examples {
-	height: 270px;
-	width: 370px;
+	height: 19rem;
+	width: 23rem;
 	right: 0;
 }
 
 #prog,
 #submit,
-#submit img {
-	height: 72px;
+#counter,
+#opponent {
+	height: 6rem;
 }
+
 #prog,
 #submit {
-	top: 400px;
+	top: 25rem;
 }
 
 #prog {
-	width: 168px;
+	width: 12rem;
 }
 
 #submit {
-	width: 72px;
-	left: 298px;
-}
-
-#submit img {
-	cursor: pointer;
-	cursor: hand;
+	width: 6rem;
+	left: 17rem;
 }
 
 #counter,
-#hand {
-	width: 372px;
-	height: 100px;
-	bottom: 0;
+#opponent {
+	width: 21rem;
+	top: 33rem;
 }
 
+#opponent,
 #hand {
 	right: 0;
 }
 
-.card {
-	height: 100px;
+/* content */
+
+h1 {
+	font-size: 3rem;
+	padding: 0.5rem;
+	text-align: center;
 }
+
+h2 {
+	font-size: 2rem;
+}
+
+h3 {
+	font-size: 1.5rem;
+}
+
+#prog .content {
+	padding: 1rem;
+	position: relative;
+	text-align: center;
+}
+
+#prog .content h2 {
+	padding: 0.25rem;
+}
+
+/* images */
+
+#submit img {
+	height: 6rem;
+	cursor: pointer;
+	cursor: hand;
+}
+
+.card {
+	width: 4rem;
+}
+
+
