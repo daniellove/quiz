@@ -6,8 +6,10 @@ div {
 }
 
 #wrapper,
-#title {
-	width: 800px;
+#title,
+#questions,
+#counter {
+	width: 600px;
 }
 
 #wrapper {
@@ -20,51 +22,45 @@ div {
 	height: 70px;
 }
 
-#questions,
-#counter {
-	top: 100px;
-}
-
 #questions {
-	height: 120px;
-	width: 620px;
-}
-
-#counter {
-	height: 500px;
-	width: 150px;
-	right: 0;
+	height: 70px;
+	top: 100px;
 }
 
 #options,
 #examples {
-	top: 250px;
+	top: 200px;
 }
 
 #options {
-	height: 250px;
-	width: 240px;
+	height: 170px;
+	width: 270px;
 }
 
 #examples {
-	height: 350px;
-	width: 350px;
-	right: 180px;
+	height: 270px;
+	width: 300px;
+	left: 300px;
 }
 
 #prog,
 #submit {
 	height: 72px;
-	bottom: 0;
+	top: 400px;
 }
 
 #prog {
-	width: 138px;
+	width: 168px;
 }
 
 #submit {
 	width: 72px;
-	left: 168px;
+	left: 198px;
+}
+
+#counter {
+	height: 100px;
+	bottom: 0;
 }
 
 
