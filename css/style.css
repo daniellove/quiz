@@ -7,6 +7,9 @@ section {
 
 body {
 	font-family: 'Lobster', cursive;
+	background-image: url('../img/table.jpg');
+	background-position: center;
+	background-size: cover;
 }
 
 section,
@@ -30,7 +33,7 @@ section {
 	position: relative;
 }
 
-#qc div {
+#qc > div {
 	position: absolute;
 }
 
@@ -49,7 +52,6 @@ section {
 }
 
 #prog,
-#prog .content,
 #submit {
 	height: 7rem;
 }
@@ -77,7 +79,7 @@ section {
 	margin-bottom: 2rem;
 }
 
-#minigame div {
+#minigame > div {
 	position: absolute;
 	width: 334px;
 	height: 95px;
@@ -101,6 +103,8 @@ h2 {
 
 h3 {
 	font-size: 1.5rem;
+	padding-top: 0.25rem;
+	padding-bottom: 0.25rem; 
 }
 
 #questions p{
@@ -109,12 +113,12 @@ h3 {
 }
 
 #prog .content {
-	padding: 0 2rem;
+	margin: 1rem;
 	text-align: center;
 }
 
 #prog .content h2 {
-	padding: 0.25rem;
+	padding-bottom: 1rem;
 }
 
 /* images */
