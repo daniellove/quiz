@@ -1,60 +1,62 @@
-div {
+div,
+section {
 	border-style: dashed;
 	border-width: 1px;
 	border-color: grey;
-	position: absolute;
+}
+
+body {
 	font-family: 'Lobster', cursive;
 }
 
-/* div layout */
-
-#wrapper,
-#title,
-#questions {
+section,
+#wrapper {
 	width: 50rem;
 }
 
+section {
+	margin-top: 2rem;
+}
+
 #wrapper {
-	height: 40rem;
-	margin: 4rem auto;
+	height: 100%;
+	margin: 2rem auto;
+}
+
+/* quiz main */
+
+#qc {
+	height: 20rem;
 	position: relative;
 }
 
-#title {
-	height: 4rem;
-}
-
-#questions {
-	height: 4rem;
-	top: 6rem;
+#qc div {
+	position: absolute;
 }
 
 #options,
 #examples {
-	top: 12rem;
+	width: 23rem;
 }
 
 #options {
-	height: 11rem;
-	width: 23rem;
+	height: 10rem;
 }
 
 #examples {
-	height: 19rem;
-	width: 23rem;
+	height: 20rem;
 	right: 0;
 }
 
 #prog,
-#submit,
-#counter,
-#opponent {
-	height: 6rem;
+#prog .content,
+#submit {
+	height: 7rem;
 }
 
 #prog,
 #submit {
-	top: 25rem;
+	bottom: 0;
 }
 
 #prog {
@@ -62,18 +64,26 @@ div {
 }
 
 #submit {
-	width: 6rem;
-	left: 17rem;
+/*	width: 7rem; */
+	left: 16rem;
 }
 
-#counter,
+/* minigame */
+
+
+#minigame {
+	height: 6rem;
+	position: relative;
+	margin-bottom: 2rem;
+}
+
+#minigame div {
+	position: absolute;
+	width: 334px;
+	height: 95px;
+}
+
 #opponent {
-	width: 21rem;
-	top: 33rem;
-}
-
-#opponent,
-#hand {
 	right: 0;
 }
 
@@ -93,9 +103,13 @@ h3 {
 	font-size: 1.5rem;
 }
 
+#questions p{
+	padding: 0.5rem 0;
+	letter-spacing: 0.05rem;
+}
+
 #prog .content {
-	padding: 1rem;
-	position: relative;
+	padding: 0 2rem;
 	text-align: center;
 }
 
@@ -106,7 +120,7 @@ h3 {
 /* images */
 
 #submit img {
-	height: 6rem;
+	height: 7rem;
 	cursor: pointer;
 	cursor: hand;
 }
