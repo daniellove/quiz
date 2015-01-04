@@ -58,15 +58,15 @@ var endQuiz = function() {
 
 var minigame = function() {
 	if (true) {
-		cardChange("#myCard", x, "correct");
-		x++;
-		y++;
+		cardChange("#myCard", correct, "correct");
+		correct++;
+		incorrect++;
 	} else {
-		cardChange("#myCard", y, "incorrect");
-		y++
+		cardChange("#myCard", incorrect, "incorrect");
+		incorrect++
 	};
-	cardChange("#oppCard", z, "opponent");
-	z++
+	cardChange("#oppCard", opposition, "opponent");
+	opposition++
 }
 
 var cardChange = function(node, variable, source) {
@@ -80,7 +80,7 @@ var cardChange = function(node, variable, source) {
 
 var resetQuiz = function() {
 	n = 1;
-	x = y = z = 0;
+	correct = incorrect = opposition = 0;
 	mgReset("#myCard");
 	mgReset("#oppCard");
 	updateProgress("", "")
