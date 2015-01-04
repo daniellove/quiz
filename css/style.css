@@ -6,7 +6,8 @@ body {
 	background-size: cover;
 }
 
-p {
+p,
+label {
 	font-family: 'Open Sans', sans-serif;
 }
 
