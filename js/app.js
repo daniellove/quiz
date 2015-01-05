@@ -9,7 +9,7 @@ $(document).on('ready', function() {
 var resetQuiz = function() {
 	n = correct = incorrect = opposition = 1;
 	// Refer 1.1
-	updateNode("#instruction", "Click the chips to begin!");
+	updateNode(".instruction", "Click the chips to begin and try to beat your opponent!");
 	updateNode("#userFinal", "You");
 	updateNode("#opponentFinal", "Opponent");
 	// Refer 1.2
@@ -17,6 +17,8 @@ var resetQuiz = function() {
 	minigameReset("#oppCard");
 	// Refer 1.3
 	updateProgress("", "")
+	// Refer 1.4
+	clearQuestion();
 }
 	// 1.1: Update the text inside the given node
 	var updateNode = function(node, text) {
@@ -35,6 +37,11 @@ var resetQuiz = function() {
 	var updateProgress = function(head, body) {
 		$("#progressTitle").text(head);
 		$("#progressBody").text(body);
+	}
+
+	// 1.4: Clear question set previous phase
+	var clearQuestion = function() {
+		$(".q").remove();
 	}
 
 // 2: Work through quiz phases
@@ -79,9 +86,9 @@ var clickButton = function() {
 
 		// 2.1.1: Remove warning and/or update instructions
 		var resestInstruction = function() {
-			$("#instruction").removeClass("warning")
+			$(".instruction").removeClass("warning")
 			// Refer 1.1
-			updateNode("#instruction", "Click the chips to submit your answer");
+			updateNode(".instruction", "Click the chips to submit your answer");
 		}
 
 		// 2.1.2: Set up for current question
@@ -98,21 +105,21 @@ var clickButton = function() {
 
 			// 2.1.2.1: Set the question for the current phase
 			var quizQuestions = function() {
-				// Refer 2.1.2.1.1
+				// Refer 1.4
 				clearQuestion();
-				q1 = "In Five Card Poker would 4 Aces beat a royal flush?";
+				q1 = "In Five Card Poker would 4 Aces beat a Royal Flush?";
 				q2 = "In Blackjack what's the term used if a player scores over 21?";
 				q3 = "What is the term used when two ones are rolled in Casino Craps?";
 				q4 = "In Texas Hold'em what are your two starting cards called?";
 				q5 = "In Roulette what is NOT a betting option";
 				questionArray = [q1, q2, q3, q4, q5];
-				// Append question for current phase
-				$("#questions").append('<p class="q">' + questionArray[(n-1)] + '</p>');
+				// Refer 2.1.2.1.1
+				selectQuestion(questionArray[(n-1)]);
 			}
 
-				// 2.1.2.1.1: Clear question set previous phase
-				var clearQuestion = function() {
-					$(".q").remove();
+				// 2.1.2.1.1: Prepend <h3> in questions section
+				var selectQuestion = function(text) {
+					$("#questions").prepend('<h3 class="q">' + text + '</h3>');
 				}
 
 			// 2.1.2.2: Set the options for the current phase
@@ -244,9 +251,9 @@ var clickButton = function() {
 
 	// 2.4: Provide warning if validation failed
 	var noAnswer = function() {
-		$("#instruction").addClass("warning");
+		$(".instruction").addClass("warning");
 		// Refer 1.1
-		updateNode("#instruction", "Please select an option before clicking then chips");
+		updateNode(".instruction", "Please select an option before clicking then chips");
 	}
 
 	// 2.5: Enter final phase
@@ -262,10 +269,6 @@ var clickButton = function() {
 
 		// 2.5.1: End the current quiz session
 		var endQuiz = function() {
-			// Refer 2.1
-			updateNode("#instruction", "Click the chips to play again!")
-			// Refer 2.1.2.1.1
-			clearQuestion();
 			// Refer 2.1.2.2.1
 			clearOptions();
 			// Refer 2.1.2.3.1
@@ -275,29 +278,64 @@ var clickButton = function() {
 		}
 
 			// 2.5.1.1: Provide final result for minigame
-			// Note: Final hand is published based on number of correct answers
-			// Note: User requires 3 or more correct answers to win minigame
 			// Note: Variable 'correct' starts at 1 so variable 'i' has been used to offset this
 			var finalResult = function() {
 				i = (correct-1);
-				if (i>=3) {
-					updateProgress("Game over", "You win!")
-				} else {
-					updateProgress("Game over", "You lose")
-				};
-				if (i===5) {
-					updateNode("#userFinal", "You: Full house!");
-				} else if (i===4){
-					updateNode("#userFinal", "You: Two pair");
-				} else if (i===3) {
-					updateNode("#userFinal", "You: Ace pair & King high");
-				} else if (i===2) {
-					updateNode("#userFinal", "You: Ace pair");
-				} else if (i===1) {
-					updateNode("#userFinal", "You: Ace high")
-				} else {
-					updateNode("#userFinal", "You: 10 high")
-				};
-				updateNode("#opponentFinal", "Opponent: Ace pair & Queen high");
+				compareCards();
+				winLose();
+				questionFeedback();
+				
 			}
 
+				// 2.5.1.1.1: Identify best cards in hands
+				// Note: Final hand is published based on number of correct answers
+				var compareCards = function() {
+					//Refer 1.1
+					if (i===5) {
+						updateNode("#userFinal", "You: Full house!");
+					} else if (i===4){
+						updateNode("#userFinal", "You: Two pair");
+					} else if (i===3) {
+						updateNode("#userFinal", "You: Ace pair & King high");
+					} else if (i===2) {
+						updateNode("#userFinal", "You: Ace pair & 10 high");
+					} else if (i===1) {
+						updateNode("#userFinal", "You: Ace high");
+					} else {
+						updateNode("#userFinal", "You: 10 high");
+					}
+					updateNode("#opponentFinal", "Opponent: Ace pair & Queen high");
+				}
+
+				// 2.5.1.1.2: Feedback on whether the user won or lost
+				// Note: User requires 3 or more correct answers to win minigame
+				var winLose = function() {
+					// Refer 1.3
+					if (i>=3) {
+						updateProgress("Game over", "You win!");
+					} else {
+						updateProgress("Game over", "You lose");
+					}
+				}
+
+				// 2.5.1.1.3: Provide detailed feedback in #questions section
+				var questionFeedback = function() {
+					// Refer 1.4
+					clearQuestion();
+					// Refer 2.1
+					updateNode(".instruction", "Click the chips to play again!");
+					// Refer 2.1.2.1.1
+					if (i===5) {
+						selectQuestion("Winner wineer chicken dinner! You got all 5 correct!");
+					} else if (i===4) {
+						selectQuestion("Wow you cleaned out the house with " + i + " of 5 correct");
+					} else if (i===3) {
+						selectQuestion("All skill and tactics");
+					} else if (i===2) {
+						selectQuestion("You almost beat them with " + i + " of 5. You'll get it next time!");
+					} else if (i===1) {
+						selectQuestion("I guess you were the sucker this time with only got " + i +" of 5 correct. Give it another go!");
+					} else {
+						selectQuestion("0 correct. No time for excuses - just learn from it and try again!");
+					}
+				}
