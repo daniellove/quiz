@@ -107,7 +107,7 @@ var clickButton = function() {
 			var quizQuestions = function() {
 				// Refer 1.4
 				clearQuestion();
-				q1 = "In Five Card Poker would 4 Aces beat a Royal Flush?";
+				q1 = "In Five Card Poker would a Royal Flush beat 4 Aces?";
 				q2 = "In Blackjack what's the term used if a player scores over 21?";
 				q3 = "What is the term used when two ones are rolled in Casino Craps?";
 				q4 = "In Texas Hold'em what are your two starting cards called?";
@@ -168,8 +168,8 @@ var clickButton = function() {
 					} else if (n===5) {
 						a = "White";
 						b = "Black";
-						c = "Single";
-						d = "Odd";
+						c = "1st 12";
+						d = "19 to 36";
 					}
 				}
 
@@ -328,13 +328,13 @@ var clickButton = function() {
 					if (i===5) {
 						selectQuestion("Winner wineer chicken dinner! You got all 5 correct!");
 					} else if (i===4) {
-						selectQuestion("Wow you cleaned out the house with " + i + " of 5 correct");
+						selectQuestion("Wow you cleaned out the house with 4 of 5 correct");
 					} else if (i===3) {
-						selectQuestion("All skill and tactics");
+						selectQuestion("You won by a hair with 3 of 5. Double or nothing - beat your score!");
 					} else if (i===2) {
-						selectQuestion("You almost beat them with " + i + " of 5. You'll get it next time!");
+						selectQuestion("You almost beat them with 3 of 5. You'll get it next time!");
 					} else if (i===1) {
-						selectQuestion("I guess you were the sucker this time with only got " + i +" of 5 correct. Give it another go!");
+						selectQuestion("I guess you were the sucker this time with only got 2 of 5 correct. Give it another go!");
 					} else {
 						selectQuestion("0 correct. No time for excuses - just learn from it and try again!");
 					}
