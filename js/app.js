@@ -100,11 +100,11 @@ var clickButton = function() {
 			var quizQuestions = function() {
 				// Refer 2.1.2.1.1
 				clearQuestion();
-				q1 = "Question 1";
-				q2 = "Question 2";
-				q3 = "Question 3";
-				q4 = "Question 4";
-				q5 = "Question 5";
+				q1 = "In Five Card Poker would 4 Aces beat a royal flush?";
+				q2 = "In Blackjack what's the term used if a player scores over 21?";
+				q3 = "What is the term used when two ones are rolled in Casino Craps?";
+				q4 = "In Texas Hold'em what are your two starting cards called?";
+				q5 = "In Roulette what is NOT a betting option";
 				questionArray = [q1, q2, q3, q4, q5];
 				// Append question for current phase
 				$("#questions").append('<p class="q">' + questionArray[(n-1)] + '</p>');
@@ -139,45 +139,45 @@ var clickButton = function() {
 				// Note: Question number = 'n'
 				var optionsSelector = function() {
 					if (n===1) {
-						a = "incorrect";
-						b = "incorrect";
-						c = "correct";
-						d = "incorrect";
+						a = "Yes";
+						b = "No";
+						c = "They would draw";
+						d = "Those two hands can't happen together";
 					} else if (n===2) {
-						a = "correct";
-						b = "incorrect";
-						c = "incorrect";
-						d = "incorrect";
+						a = "Blackjack";
+						b = "Hit";
+						c = "Bust";
+						d = "Full House";
 					} else if (n===3) {
-						a = "incorrect";
-						b = "incorrect";
-						c = "incorrect";
-						d = "correct";
+						a = "Rat Eyes";
+						b = "Snake Eyes";
+						c = "Ace Deuce";
+						d = "Double Ones";
 					} else if (n===4) {
-						a = "incorrect";
-						b = "incorrect";
-						c = "correct";
-						d = "incorrect";
+						a = "Box cards";
+						b = "House cards";
+						c = "Hole cards";
+						d = "River cards";
 					} else if (n===5) {
-						a = "incorrect";
-						b = "correct";
-						c = "incorrect";
-						d = "incorrect";
+						a = "White";
+						b = "Black";
+						c = "Single";
+						d = "Odd";
 					}
 				}
 
 				// 2.1.2.2.3: Add value of 1 to the correct answer for the current phase
 				var correctAnswer = function() {
 					if (n===1) {
-						i = 3;
-					} else if (n===2) {
-						i = 1;
-					} else if (n===3) {
 						i = 4;
+					} else if (n===2) {
+						i = 3;
+					} else if (n===3) {
+						i = 2;
 					} else if (n===4) {
 						i = 3;
 					} else if (n===5) {
-						i = 2;
+						i = 1;
 					}
 					$("#radio" + i).val(1);
 				}
