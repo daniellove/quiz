@@ -9,7 +9,7 @@ $(document).on('ready', function() {
 var resetQuiz = function() {
 	n = correct = incorrect = opposition = 1;
 	// Refer 1.1
-	updateNode(".instruction", "Click the chips to begin and try to beat your opponent!");
+	updateNode(".instruction", "Click the chips to face your opponent!");
 	updateNode("#userFinal", "You");
 	updateNode("#opponentFinal", "Opponent");
 	// Refer 1.2
@@ -304,7 +304,13 @@ var clickButton = function() {
 					} else {
 						updateNode("#userFinal", "You: 10 high");
 					}
-					updateNode("#opponentFinal", "Opponent: Ace pair & Queen high");
+
+					if (i === 2 || i === 3) {
+						updateNode("#opponentFinal", "Opponent: Ace pair & Queen high");
+					} else {
+						updateNode("#opponentFinal", "Opponent: Pair");
+					}
+
 				}
 
 				// 2.5.1.1.2: Feedback on whether the user won or lost
@@ -332,9 +338,9 @@ var clickButton = function() {
 					} else if (i===3) {
 						selectQuestion("You won by a hair with 3 of 5. Double or nothing - beat your score!");
 					} else if (i===2) {
-						selectQuestion("You almost beat them with 3 of 5. You'll get it next time!");
+						selectQuestion("You almost beat them with 2 of 5. You'll get it next time!");
 					} else if (i===1) {
-						selectQuestion("I guess you were the sucker this time with only got 2 of 5 correct. Give it another go!");
+						selectQuestion("I guess you were the sucker this time with only got 1 of 5 correct. Give it another go!");
 					} else {
 						selectQuestion("0 correct. No time for excuses - just learn from it and try again!");
 					}
