@@ -30,7 +30,7 @@ var clickButton = function() {
 	$("#submit").on("mousedown", function() {
 		// For phases 1 to 5...
 		if (n <= 5) {
-			// Set up for current phase
+			// Set up for next pahse
 			nextQuestion();
 			// Update the minigame
 			minigame();
@@ -85,8 +85,9 @@ var quizOptions = function() {
 	// Append options for current phase
 	var optionArray = [a, b, c, d];
 	for (var i = 1; i <= 4; i++) {
-		$("#options").append('<div><input type="radio" name="radio' + i + '" id="radio' + i + '" class="radio"/><label for="radio' + i + '">' + optionArray[(i-1)] + '</label></div>');
+		$("#options").append('<div><input type="radio" id="radio' + i + '" class="radio" value="0"/><label for="radio' + i + '">' + optionArray[(i-1)] + '</label></div>');
 	};
+	correctAnswer();
 }
 
 // Example image selector
@@ -135,27 +136,44 @@ var optionsSelector = function() {
 		b = "1b";
 		c = "1c";
 		d = "1d";
-	}else if (n===2) {
+	} else if (n===2) {
 		a = "2a";
 		b = "2b";
 		c = "2c";
 		d = "2d";
-	}else if (n===3) {
+	} else if (n===3) {
 		a = "3a";
 		b = "3b";
 		c = "3c";
 		d = "3d";
-	}else if (n===4) {
+	} else if (n===4) {
 		a = "4a";
 		b = "4b";
 		c = "4c";
 		d = "4d";
-	}else if (n===5) {
+	} else if (n===5) {
 		a = "5a";
 		b = "5b";
 		c = "5c";
 		d = "5d";
 	}
+}
+
+// Set correct option based on phase
+// 'i' is the correct option for each phase
+var correctAnswer = function() {
+	if (n===1) {
+		i = 3;
+	} else if (n===2) {
+		i = 1;
+	} else if (n===3) {
+		i = 4;
+	} else if (n===4) {
+		i = 3;
+	} else if (n===5) {
+		i = 2;
+	}
+	$("#radio" + i).val(1);
 }
 
 var minigame = function() {
