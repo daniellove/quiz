@@ -187,3 +187,7 @@ h3 {
 .card {
 	width: 4rem;
 }
+
+.warning {
+	color: #f26624;
+}

@@ -28,19 +28,47 @@ var minigameReset = function(node) {
 var clickButton = function() {
 // Behaviour for each phase of the quiz
 	$("#submit").on("mousedown", function() {
-		if (n <= 5) {
-			updateNode("#instruction", "Click the chips to submit your answer");
-			updateMinigame();
+		if (n===1) {
+			resestInstruction();
 			nextQuestion();
 			n++;
 		} else if (n===6) {
-			updateMinigame();
-			endQuiz();
-			n++;
+			if (validateAnswer()) {
+				resestInstruction();
+				updateMinigame();
+				endQuiz();
+				n++;
+			} else {
+				noOptionSelected();
+			};
+		} else if (n <= 5) {
+			if (validateAnswer()) {
+				resestInstruction();
+				updateMinigame();
+				nextQuestion();
+				n++;
+			} else {
+				noOptionSelected();
+			};
 		} else {
 			resetQuiz()
 		}
 	});
+}
+
+var validateAnswer = function() {
+// If chosenOption is defined then continue
+	chosenOption = $(".radio[type=radio]:checked").val();
+	if(typeof chosenOption != "undefined") {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+var noOptionSelected = function() {
+	$("#instruction").addClass("warning");
+	updateNode("#instruction", "Please select an option before clicking then chips");
 }
 
 var nextQuestion = function() {
@@ -112,6 +140,11 @@ var clearImage = function() {
 
 var updateNode = function(node, text) {
 	$(node).text(text);
+}
+
+var resestInstruction = function() {
+	$("#instruction").removeClass("warning")
+	updateNode("#instruction", "Click the chips to submit your answer");
 }
 
 var updateProgress = function(head, body) {
@@ -200,7 +233,6 @@ var updateMinigame = function() {
 // 'variable++' adds 1 to the users correct/incorrect score
 // and/or gets the next flip card ready
 	if (n>1) {
-	chosenOption = $(".radio[type=radio]:checked").val();
 		if (chosenOption>0) {
 			cardFlip("#myCard", correct, "correct");
 			correct++;
