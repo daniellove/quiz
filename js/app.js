@@ -8,9 +8,9 @@ var resetQuiz = function() {
 	n = 1;
 	// Counters for minigame
 	correct = incorrect = opposition = 1;
-	// Deal to user
+	// Deal user cards
 	minigameReset("#myCard");
-	// Deal to opposition
+	// Deal opposition cards
 	minigameReset("#oppCard");
 	// Reset quiz progress
 	updateProgress("", "")
@@ -25,24 +25,16 @@ var minigameReset = function(node) {
 	};
 }
 
-
+// Behaviour for each phase of the quiz
 var clickButton = function() {
 	$("#submit").on("mousedown", function() {
-		// For phases 1 to 5...
 		if (n <= 5) {
-			// Set up for next pahse
+			updateMinigame();
 			nextQuestion();
-			// Update the minigame
-			minigame();
-			// Ready for next phase
 			n++;
-		// For phase 6...
 		} else if (n===6) {
-			// Clear the quiz
+			updateMinigame();
 			endQuiz();
-			// Provide minigame result
-			minigame();
-			// Ready to reset quiz
 			n++;
 		} else {
 			resetQuiz()
@@ -50,14 +42,12 @@ var clickButton = function() {
 	});
 }
 
+// Add appropriate question, options and example image
+// then update the user on their progress
 var nextQuestion = function() {
-	// Add appropriate question
 	quizQuestions();
-	// Add appropriate options
 	quizOptions();
-	// Add appropriate example image
 	quizExamples();
-	// Update the user on their progress through the quiz
 	updateProgress("Question:", n + " of 5");
 }
 
@@ -85,8 +75,9 @@ var quizOptions = function() {
 	// Append options for current phase
 	var optionArray = [a, b, c, d];
 	for (var i = 1; i <= 4; i++) {
-		$("#options").append('<div><input type="radio" id="radio' + i + '" class="radio" value="0"/><label for="radio' + i + '">' + optionArray[(i-1)] + '</label></div>');
+		$("#options").append('<div><input type="radio" name="radio" id="radio' + i + '" class="radio" value="0"/><label for="radio' + i + '">' + optionArray[(i-1)] + '</label></div>');
 	};
+	// Add a value to the correct answer for current phase
 	correctAnswer();
 }
 
@@ -99,17 +90,12 @@ var quizExamples = function() {
 }
 
 var endQuiz = function() {
-	// Remove final question, options and example image
+// Remove final question, options and example image
+// Show final hand
 	clearQuestion();
 	clearOptions();
 	clearImage();
-	// Provide final result for minigame
-	// User requires 3 or more correct answers to beat the opposition
-	if (incorrect > 2) {
-		updateProgress("Game over", "You lose...");
-	} else {
-		updateProgress("Game over", "You win!");
-	};
+	selectResult();
 }
 
 var clearQuestion = function() {
@@ -125,12 +111,13 @@ var clearImage = function() {
 }
 
 var updateProgress = function(head, body) {
+//Update each node in #progress
 	$("#progressTitle").text(head);
 	$("#progressBody").text(body);
 }
 
-// Set options based on phase
 var optionsSelector = function() {
+// Set options based on phase
 	if (n===1) {
 		a = "1a";
 		b = "1b";
@@ -159,9 +146,9 @@ var optionsSelector = function() {
 	}
 }
 
+var correctAnswer = function() {
 // Set correct option based on phase
 // 'i' is the correct option for each phase
-var correctAnswer = function() {
 	if (n===1) {
 		i = 3;
 	} else if (n===2) {
@@ -176,33 +163,50 @@ var correctAnswer = function() {
 	$("#radio" + i).val(1);
 }
 
-var minigame = function() {
+var selectResult = function() {
+// Provide final result for minigame depending on number of correct answers
+// Note: correct variable starts at 1 so correct answers, 'i', is correct variable less 1
+// User requires 3 or more correct answers to validate a 
+	i = (correct-1);
+	if (i===5) {
+		updateProgress("Game over", "Full House!");
+	} else if (i===4){
+		updateProgress("Game over", "Two Pair");
+	} else if (i===3) {
+		updateProgress("Game over", "Ace pair & king high");
+	} else if (i===2) {
+		updateProgress("Game over", "Ace pair");
+	} else if (i===1) {
+		updateProgress("Game over", "Ace high")
+	} else {
+		updateProgress("Game over", "10 high")
+	}
+}
+
+var updateMinigame = function() {
+// Flip a good card when the correct answer is chosen
+// else flip a dud card
+// 'variable++' adds 1 to the users correct/incorrect score
+// and/or gets the next flip card ready
 	if (n>1) {
-		// If the correct answer was selected...
-		if (true) {
-			// Flip a good card
+	chosenOption = $(".radio[type=radio]:checked").val();
+		if (chosenOption>0) {
 			cardFlip("#myCard", correct, "correct");
-			// Set up for next correct answer
 			correct++;
 		} else {
-			// Flip a dud card
 			cardFlip("#myCard", incorrect, "incorrect");
-			// Set up for next incorrect answer
 			incorrect++
 		};
-		// Flip opposition card
-		// Opposition always has the same 5 cards
 		cardFlip("#oppCard", opposition, "opponent");
-		// Set up for oppositions next card
 		opposition++
 	}
 }
 
 var cardFlip = function(node, variable, source) {
+// Remove the last face down card
+// and add a face up card
 	if (n > 1) {
-		// Remove the last face down card
 		$(node).children().last().remove();
-		// Prepend a face up card
 		$(node).prepend('<img src="img/' + source + '/' + variable + '.png" alt="' + source + '" class="card">');
 	};
 }
