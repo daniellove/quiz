@@ -135,6 +135,10 @@ h3 {
 	padding-bottom: 0.25rem; 
 }
 
+#instruction {
+	text-align: center;
+}
+
 #questions p{
 	padding: 0.5rem 0;
 	letter-spacing: 0.05rem;

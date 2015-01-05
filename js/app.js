@@ -8,6 +8,7 @@ var resetQuiz = function() {
 // deal cards
 // amd clear #progress
 	n = correct = incorrect = opposition = 1;
+	newInstruction("Click the chips to begin!");
 	minigameReset("#myCard");
 	minigameReset("#oppCard");
 	updateProgress("", "")
@@ -26,6 +27,7 @@ var clickButton = function() {
 // Behaviour for each phase of the quiz
 	$("#submit").on("mousedown", function() {
 		if (n <= 5) {
+			newInstruction("Answer the questions to beat your oponent!");
 			updateMinigame();
 			nextQuestion();
 			n++;
@@ -87,6 +89,7 @@ var quizExamples = function() {
 var endQuiz = function() {
 // Remove final question, options and example image
 // Show final hand
+	newInstruction("Click the chips to play again!")
 	clearQuestion();
 	clearOptions();
 	clearImage();
@@ -103,6 +106,10 @@ var clearOptions = function() {
 
 var clearImage = function() {
 	$(".exampleImage").remove();
+}
+
+var newInstruction = function(text) {
+	$("#instruction").text(text);
 }
 
 var updateProgress = function(head, body) {
