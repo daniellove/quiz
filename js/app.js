@@ -4,29 +4,26 @@ $(document).on('ready', function() {
 });
 
 var resetQuiz = function() {
-	// Phase counter
-	n = 1;
-	// Counters for minigame
-	correct = incorrect = opposition = 1;
-	// Deal user cards
+// Reset counters,
+// deal cards
+// amd clear #progress
+	n = correct = incorrect = opposition = 1;
 	minigameReset("#myCard");
-	// Deal opposition cards
 	minigameReset("#oppCard");
-	// Reset quiz progress
 	updateProgress("", "")
 }
 
 var minigameReset = function(node) {
-	// Remove all cards
+// Remove all cards
+// and add 5 face down cards
 	$(node).children().remove();
-	// Add 5 face down cards
 	for (var i = 1; i <= 5; i++) {
 		$(node).append('<img src="img/ph.png" alt="placeholder" class="card">');
 	};
 }
 
-// Behaviour for each phase of the quiz
 var clickButton = function() {
+// Behaviour for each phase of the quiz
 	$("#submit").on("mousedown", function() {
 		if (n <= 5) {
 			updateMinigame();
@@ -42,50 +39,48 @@ var clickButton = function() {
 	});
 }
 
+var nextQuestion = function() {
 // Add appropriate question, options and example image
 // then update the user on their progress
-var nextQuestion = function() {
 	quizQuestions();
 	quizOptions();
 	quizExamples();
 	updateProgress("Question:", n + " of 5");
 }
 
-// Question selector
 var quizQuestions = function() {
-	// Clear question from previous phase
+// Clear question from previous phase.
+// Set the questions to be used in array
+// and append the appropriate question for the current phase
 	clearQuestion();
-	// Set questions to be used in array
 	q1 = "Question 1";
 	q2 = "Question 2";
 	q3 = "Question 3";
 	q4 = "Question 4";
 	q5 = "Question 5";
-	// Append question for current phase
 	questionArray = [q1, q2, q3, q4, q5];
 	$("#questions").append('<p class="q">' + questionArray[(n-1)] + '</p>');
 }
 
 // Options selector
 var quizOptions = function() {
-	// Clear options from previous phase
+// Clear options from previous phase.
+// Select appropriate set of options for current phase
+// then append these options
+// and add a value to the correct answer
 	clearOptions();
-	// Select appropriate set of options for current phase
 	optionsSelector();	
-	// Append options for current phase
 	var optionArray = [a, b, c, d];
 	for (var i = 1; i <= 4; i++) {
 		$("#options").append('<div><input type="radio" name="radio" id="radio' + i + '" class="radio" value="0"/><label for="radio' + i + '">' + optionArray[(i-1)] + '</label></div>');
 	};
-	// Add a value to the correct answer for current phase
 	correctAnswer();
 }
 
-// Example image selector
 var quizExamples = function() {
-	// Clear image from previous phase
+// Clear the image from previous phase
+// then append the image for the current phase
 	clearImage();
-	// Append image for current phase
 	$("#examples").append('<img src="img/examples/' + n + '.jpg" alt="example ' + n + '" class="exampleImage">');
 }
 
