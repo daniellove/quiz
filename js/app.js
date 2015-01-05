@@ -8,7 +8,9 @@ var resetQuiz = function() {
 // deal cards
 // amd clear #progress
 	n = correct = incorrect = opposition = 1;
-	newInstruction("Click the chips to begin!");
+	updateNode("#instruction", "Click the chips to begin!");
+	updateNode("#userFinal", "You");
+	updateNode("#opponentFinal", "Opponent");
 	minigameReset("#myCard");
 	minigameReset("#oppCard");
 	updateProgress("", "")
@@ -27,7 +29,7 @@ var clickButton = function() {
 // Behaviour for each phase of the quiz
 	$("#submit").on("mousedown", function() {
 		if (n <= 5) {
-			newInstruction("Answer the questions to beat your oponent!");
+			updateNode("#instruction", "Click the chips to submit your answer");
 			updateMinigame();
 			nextQuestion();
 			n++;
@@ -89,11 +91,11 @@ var quizExamples = function() {
 var endQuiz = function() {
 // Remove final question, options and example image
 // Show final hand
-	newInstruction("Click the chips to play again!")
+	updateNode("#instruction", "Click the chips to play again!")
 	clearQuestion();
 	clearOptions();
 	clearImage();
-	selectResult();
+	finalResult();
 }
 
 var clearQuestion = function() {
@@ -108,8 +110,8 @@ var clearImage = function() {
 	$(".exampleImage").remove();
 }
 
-var newInstruction = function(text) {
-	$("#instruction").text(text);
+var updateNode = function(node, text) {
+	$(node).text(text);
 }
 
 var updateProgress = function(head, body) {
@@ -121,30 +123,30 @@ var updateProgress = function(head, body) {
 var optionsSelector = function() {
 // Set options based on phase
 	if (n===1) {
-		a = "1a";
-		b = "1b";
-		c = "1c";
-		d = "1d";
+		a = "incorrect";
+		b = "incorrect";
+		c = "correct";
+		d = "incorrect";
 	} else if (n===2) {
-		a = "2a";
-		b = "2b";
-		c = "2c";
-		d = "2d";
+		a = "correct";
+		b = "incorrect";
+		c = "incorrect";
+		d = "incorrect";
 	} else if (n===3) {
-		a = "3a";
-		b = "3b";
-		c = "3c";
-		d = "3d";
+		a = "incorrect";
+		b = "incorrect";
+		c = "incorrect";
+		d = "correct";
 	} else if (n===4) {
-		a = "4a";
-		b = "4b";
-		c = "4c";
-		d = "4d";
+		a = "incorrect";
+		b = "incorrect";
+		c = "correct";
+		d = "incorrect";
 	} else if (n===5) {
-		a = "5a";
-		b = "5b";
-		c = "5c";
-		d = "5d";
+		a = "incorrect";
+		b = "correct";
+		c = "incorrect";
+		d = "incorrect";
 	}
 }
 
@@ -165,24 +167,31 @@ var correctAnswer = function() {
 	$("#radio" + i).val(1);
 }
 
-var selectResult = function() {
+var finalResult = function() {
 // Provide final result for minigame depending on number of correct answers
+// Final hand published
 // Note: correct variable starts at 1 so correct answers, 'i', is correct variable less 1
-// User requires 3 or more correct answers to validate a 
+// Note: User requires 3 or more correct answers to win
 	i = (correct-1);
-	if (i===5) {
-		updateProgress("Game over", "Full House!");
-	} else if (i===4){
-		updateProgress("Game over", "Two Pair");
-	} else if (i===3) {
-		updateProgress("Game over", "Ace pair & king high");
-	} else if (i===2) {
-		updateProgress("Game over", "Ace pair");
-	} else if (i===1) {
-		updateProgress("Game over", "Ace high")
+	if (i>=3) {
+		updateProgress("Game over", "You win!")
 	} else {
-		updateProgress("Game over", "10 high")
-	}
+		updateProgress("Game over", "You lose")
+	};
+	if (i===5) {
+		updateNode("#userFinal", "You: Full house!");
+	} else if (i===4){
+		updateNode("#userFinal", "You: Two pair");
+	} else if (i===3) {
+		updateNode("#userFinal", "You: Ace pair & King high");
+	} else if (i===2) {
+		updateNode("#userFinal", "You: Ace pair");
+	} else if (i===1) {
+		updateNode("#userFinal", "You: Ace high")
+	} else {
+		updateNode("#userFinal", "You: 10 high")
+	};
+	updateNode("#opponentFinal", "Opponent: Ace pair & Queen high");
 }
 
 var updateMinigame = function() {

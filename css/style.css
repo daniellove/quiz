@@ -119,6 +119,13 @@ section {
 
 /* content */
 
+h1,
+h2,
+h3,
+.hand {
+	text-shadow: 0.08rem 0.03rem black;
+}
+
 h1 {
 	font-size: 3rem;
 	padding: 0.5rem;
@@ -133,6 +140,20 @@ h3 {
 	font-size: 1.5rem;
 	padding-top: 0.25rem;
 	padding-bottom: 0.25rem; 
+}
+
+.hand {
+	margin-top: -2.5rem;
+}
+
+.user {
+	left: 2rem;
+	color: #51f5ef;
+}
+
+.opponent {
+	left: 28rem;
+	color: #f26624;
 }
 
 #instruction {
