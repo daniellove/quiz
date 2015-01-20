@@ -1,31 +1,31 @@
 $(document).on('ready', function() {
-	// Refer 1
 	resetQuiz();
-	// Refer 2
 	clickButton();
 });
 
-// 1: Reset the quiz
+var questionArray = [
+	{q: "In Five Card Poker would a Royal Flush beat 4 Aces?"},
+	{q: "In Blackjack what's the term used if a player scores over 21?"},
+	{q: "What is the term used when two ones are rolled in Casino Craps?"},
+	{q:  "In Texas Hold'em what are your two starting cards called?"},
+	{q: "In Roulette what is NOT a betting option"}
+];
+
 var resetQuiz = function() {
 	n = correct = incorrect = opposition = 1;
-	// Refer 1.1
 	updateNode(".instruction", "Click the chips to face your opponent!");
 	updateNode("#userFinal", "You");
 	updateNode("#opponentFinal", "Opponent");
-	// Refer 1.2
 	minigameReset("#myCard");
 	minigameReset("#oppCard");
-	// Refer 1.3
 	updateProgress("", "")
-	// Refer 1.4
 	clearQuestion();
 }
-	// 1.1: Update the text inside the given node
+	
 	var updateNode = function(node, text) {
 		$(node).text(text);
 	}
 
-	// 1.2: Reset the minigame
 	var minigameReset = function(node) {
 		$(node).children().remove();
 		for (var i = 1; i <= 5; i++) {
@@ -33,13 +33,11 @@ var resetQuiz = function() {
 		};
 	}
 
-	// 1.3: Update the progress div
 	var updateProgress = function(head, body) {
 		$("#progressTitle").text(head);
 		$("#progressBody").text(body);
 	}
 
-	// 1.4: Clear question set previous phase
 	var clearQuestion = function() {
 		$(".q").remove();
 	}
@@ -105,16 +103,10 @@ var clickButton = function() {
 
 			// 2.1.2.1: Set the question for the current phase
 			var quizQuestions = function() {
-				// Refer 1.4
 				clearQuestion();
-				q1 = "In Five Card Poker would a Royal Flush beat 4 Aces?";
-				q2 = "In Blackjack what's the term used if a player scores over 21?";
-				q3 = "What is the term used when two ones are rolled in Casino Craps?";
-				q4 = "In Texas Hold'em what are your two starting cards called?";
-				q5 = "In Roulette what is NOT a betting option";
-				questionArray = [q1, q2, q3, q4, q5];
-				// Refer 2.1.2.1.1
-				selectQuestion(questionArray[(n-1)]);
+				i = Math.floor(Math.random()*4)
+				selectQuestion(questionArray[i].q);
+
 			}
 
 				// 2.1.2.1.1: Prepend <h3> in questions section
