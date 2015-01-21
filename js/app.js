@@ -1,24 +1,36 @@
 $(document).on('ready', function() {
 	resetQuiz();
-	clickButton();
+	initiateQuiz();
 });
 
 var questionArray = [
-	{q: "In Five Card Poker would a Royal Flush beat 4 Aces?"},
-	{q: "In Blackjack what's the term used if a player scores over 21?"},
-	{q: "What is the term used when two ones are rolled in Casino Craps?"},
-	{q:  "In Texas Hold'em what are your two starting cards called?"},
-	{q: "In Roulette what is NOT a betting option"}
+	{	question: "In Five Card Poker would a Royal Flush beat 4 Aces?",
+		possibleOptions: [{text: "Yes", val: 0},{text: "No", val: 0}, {text: "They would draw", val: 0}, {text: "Those two hands can't happen together", val: 1}]
+	},
+	{	question: "In Blackjack what's the term used if a player scores over 21?",
+		possibleOptions: [{text: "Blackjack", val: 0},{text: "Hit", val: 0}, {text: "Bust", val: 1}, {text: "Full House", val: 0}]
+	},
+	{	question: "What is the term used when two ones are rolled in Casino Craps?",
+		possibleOptions: [{text: "Rat Eyes", val: 0},{text: "Snake Eyes", val: 1}, {text: "Ace Deuce", val: 0}, {text: "Double Ones", val: 0}]
+	},
+	{	question:  "In Texas Hold'em what are your two starting cards called?",
+		possibleOptions: [{text: "Box cards", val: 0},{text: "House cards", val: 0}, {text: "Hole cards", val: 1}, {text: "River cards", val: 0}]
+	},
+	{	question: "In Roulette what is NOT a betting option",
+		possibleOptions: [{text: "White", val: 1},{text: "Black", val: 0}, {text: "1st 12", val: 0}, {text: "19 to 36", val: 0}]
+	}
 ];
 
 var resetQuiz = function() {
-	n = correct = incorrect = opposition = 1;
+	// Global variables
+	phase = correct = incorrect = opposition = 1;
+
 	updateNode(".instruction", "Click the chips to face your opponent!");
 	updateNode("#userFinal", "You");
 	updateNode("#opponentFinal", "Opponent");
 	minigameReset("#myCard");
 	minigameReset("#oppCard");
-	updateProgress("", "")
+	updateProgress("", "");
 	clearQuestion();
 }
 	
@@ -40,34 +52,28 @@ var resetQuiz = function() {
 
 	var clearQuestion = function() {
 		$(".q").remove();
+		$("#options").children().remove();
+		$(".exampleImage").remove();
 	}
 
-// 2: Work through quiz phases
-var clickButton = function() {
+// Work through quiz phases
+var initiateQuiz = function() {
 	$("#submit").on("mousedown", function() {
-		if (n===1) {
-			// Refer 2.1
+		if (phase===1) {
 			startQuiz();
-		} else if (n <= 5) {
-			if (// Refer 2.2
-			validateAnswer()) {
-				// Refer 2.3
+		} else if (phase <= 5) {
+			if (validateAnswer()) {
 				nextPhase();
 			} else {
-				// Refer 2.4
 				noAnswer();
 			}
-		} else if (n===6) {
-			if (// Refer 2.2
-			validateAnswer()) {
-				// Refer 2.5
+		} else if (phase===6) {
+			if (validateAnswer()) {
 				finalPhase();
 			} else {
-				//Refer 2.4
 				noAnswer();
 			}
 		} else {
-			// Refer 2.6
 			resetQuiz()
 		}
 	});
@@ -79,7 +85,7 @@ var clickButton = function() {
 		resestInstruction();
 		// Refer 2.1.2
 		nextQuestion();
-		n++;
+		phase++;
 	}
 
 		// 2.1.1: Remove warning and/or update instructions
@@ -89,109 +95,26 @@ var clickButton = function() {
 			updateNode(".instruction", "Click the chips to submit your answer");
 		}
 
-		// 2.1.2: Set up for current question
-		var nextQuestion = function() {
-			// Refer 2.1.2.1
-			quizQuestions();
-			// Refer 2.1.2.2
-			quizOptions();
-			// Refer 2.1.2.3
-			quizExamples();
-			// Refer 1.3
-			updateProgress("Question:", n + " of 5");
-		}
-
 			// 2.1.2.1: Set the question for the current phase
-			var quizQuestions = function() {
+			var nextQuestion = function() {
+				var i = Math.floor(Math.random()*4),
+					qText = questionArray[i].question,
+					qOptions = questionArray[i].possibleOptions;
+
 				clearQuestion();
-				i = Math.floor(Math.random()*4)
-				selectQuestion(questionArray[i].q);
-
-			}
-
-				// 2.1.2.1.1: Prepend <h3> in questions section
-				var selectQuestion = function(text) {
-					$("#questions").prepend('<h3 class="q">' + text + '</h3>');
-				}
-
-			// 2.1.2.2: Set the options for the current phase
-			var quizOptions = function() {
-				// Refer 2.1.2.2.1
-				clearOptions();
-				// Refer 2.1.2.2.2
-				optionsSelector();
-				// Create array using selected option set
-				var optionArray = [a, b, c, d];
-				// Append selected option set
-				for (var i = 1; i <= 4; i++) {
-					$("#options").append('<div><input type="radio" name="radio" id="radio' + i + '" class="radio" value="0"/><label for="radio' + i + '">' + optionArray[(i-1)] + '</label></div>');
+				selectQuestion(qText);
+				for (var option = 1; option <= 4; option++) {
+					$("#options").append('<div><input type="radio" name="radio" id="radio' + option + '" class="radio" value="' + qOptions[option-1].val + '"/><label for="radio' + option + '">' + qOptions[option-1].text + '</label></div>');
 				};
-				// Refer 2.1.2.2.3
-				correctAnswer();
+				$("#examples").append('<img src="img/examples/' + (i+1) + '.jpg" alt="example ' + (i+1) + '" class="exampleImage">');
+
+				updateProgress("Question:", phase + " of 5");
 			}
-				// 2.1.2.2.1: Clear options set in previous phase
-				var clearOptions = function() {
-					$("#options").children().remove();
-				}
 
-				// 2.1.2.2.2: Select option set for current phase
-				// Note: Question number = 'n'
-				var optionsSelector = function() {
-					if (n===1) {
-						a = "Yes";
-						b = "No";
-						c = "They would draw";
-						d = "Those two hands can't happen together";
-					} else if (n===2) {
-						a = "Blackjack";
-						b = "Hit";
-						c = "Bust";
-						d = "Full House";
-					} else if (n===3) {
-						a = "Rat Eyes";
-						b = "Snake Eyes";
-						c = "Ace Deuce";
-						d = "Double Ones";
-					} else if (n===4) {
-						a = "Box cards";
-						b = "House cards";
-						c = "Hole cards";
-						d = "River cards";
-					} else if (n===5) {
-						a = "White";
-						b = "Black";
-						c = "1st 12";
-						d = "19 to 36";
-					}
-				}
-
-				// 2.1.2.2.3: Add value of 1 to the correct answer for the current phase
-				var correctAnswer = function() {
-					if (n===1) {
-						i = 4;
-					} else if (n===2) {
-						i = 3;
-					} else if (n===3) {
-						i = 2;
-					} else if (n===4) {
-						i = 3;
-					} else if (n===5) {
-						i = 1;
-					}
-					$("#radio" + i).val(1);
-				}
-
-			// 2.1.2.3: Set the example image for the current phase
-			var quizExamples = function() {
-				// Refer 2.1.2.3.1
-				clearImage();
-				// Append example image for current phase
-				$("#examples").append('<img src="img/examples/' + n + '.jpg" alt="example ' + n + '" class="exampleImage">');
+			var selectQuestion = function(qText) {
+				$("#questions").prepend('<h3 class="q">' + qText + '</h3>');
 			}
-				// 2.1.2.3.1: Remove example image set in previous phase
-				var clearImage = function() {
-					$(".exampleImage").remove();
-				}
+
 
 	// 2.2: Check if an answer was selected
 	var validateAnswer = function() {
@@ -211,11 +134,11 @@ var clickButton = function() {
 		nextQuestion();
 		// Refer 2.3.1
 		updateMinigame();
-		n++;
+		phase++;
 	}
 		// 2.3.1: Update hands based on result from previous phase
 		var updateMinigame = function() {
-			if (n>1) {
+			if (phase>1) {
 				if (chosenOption>0) {
 					// Refer 2.3.1.1
 					// Note: If correct flip a good card
@@ -235,7 +158,7 @@ var clickButton = function() {
 		}
 			// 2.3.1.1: Flip a card
 			var cardFlip = function(node, variable, source) {
-				if (n > 1) {
+				if (phase > 1) {
 					$(node).children().last().remove();
 					$(node).prepend('<img src="img/' + source + '/' + variable + '.png" alt="' + source + '" class="card">');
 				};
@@ -256,22 +179,12 @@ var clickButton = function() {
 		updateMinigame();
 		// Refer 2.5.1
 		endQuiz();
-		n++;
+		phase++;
 	}
-
-		// 2.5.1: End the current quiz session
-		var endQuiz = function() {
-			// Refer 2.1.2.2.1
-			clearOptions();
-			// Refer 2.1.2.3.1
-			clearImage();
-			// Refer 2.5.1.1
-			finalResult();
-		}
 
 			// 2.5.1.1: Provide final result for minigame
 			// Note: Variable 'correct' starts at 1 so variable 'i' has been used to offset this
-			var finalResult = function() {
+			var endQuiz = function() {
 				i = (correct-1);
 				compareCards();
 				winLose();
@@ -324,7 +237,7 @@ var clickButton = function() {
 					updateNode(".instruction", "Click the chips to play again!");
 					// Refer 2.1.2.1.1
 					if (i===5) {
-						selectQuestion("Winner wineer chicken dinner! You got all 5 correct!");
+						selectQuestion("Winner winner chicken dinner! You got all 5 correct!");
 					} else if (i===4) {
 						selectQuestion("Wow you cleaned out the house with 4 of 5 correct");
 					} else if (i===3) {
