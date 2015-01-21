@@ -70,7 +70,7 @@ function nextQuestion() {
 	// Add question
 	updateNode(".question", qText)
 	// Append options
-	for (var option = 1; option <= 4; option++) {
+	for (var option = 1; option <= qOptions.length; option++) {
 		$("#options").append('<div><input type="radio" name="radio" id="radio' + option + '" class="radio" value="' + qOptions[option-1].val + '"/><label for="radio' + option + '">' + qOptions[option-1].text + '</label></div>');
 	};
 	// Append example image
