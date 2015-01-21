@@ -1,3 +1,7 @@
+$(document).on(ready, function() {
+	preloadImages();
+});
+
 function questionArray() {
 	questionBank = [
 		{	question: "In Roulette what is NOT a betting option?",
@@ -42,3 +46,26 @@ function questionArray() {
 		}
 	]
 };
+
+function preloadImages() {
+	i21 = new Image(736,640)
+	i21.src = "img/examples/21.jpg"
+	badhand = new Image(736,640)
+	badhand.src = "img/examples/badhand.jpg"
+	blackjack = new Image(736,640)
+	blackjack.src = "img/examples/blackjack.jpg"
+	chicken = new Image(736,640)
+	chicken.src = "img/examples/chicken.jpg"
+	chips = new Image(736,640)
+	chips.src = "img/examples/chips.jpg"
+	dice = new Image(736,640)
+	dice.src = "img/examples/dice.jpg"
+	eleven = new Image(736,640)
+	eleven.src = "img/examples/eleven.jpg"
+	holdem = new Image(736,640)
+	holdem.src = "img/examples/holdem.jpg"
+	roulette = new Image(736,640)
+	roulette.src = "img/examples/roulette.jpg"
+	royalflush = new Image(736,640)
+	royalflush.src = "img/examples/royalflush.jpg"
+}
