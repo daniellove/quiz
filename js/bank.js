@@ -1,3 +1,7 @@
+$(document).on("ready", function() {
+	preloadImages();
+});
+
 function questionArray() {
 	questionBank = [
 		{	question: "In Roulette what is NOT a betting option?",
@@ -42,3 +46,60 @@ function questionArray() {
 		}
 	]
 };
+
+function preloadImages() {
+	// Preload example images
+	i21 = new Image(736,640)
+	i21.src = "img/examples/21.jpg"
+	badhand = new Image(736,640)
+	badhand.src = "img/examples/badhand.jpg"
+	blackjack = new Image(736,640)
+	blackjack.src = "img/examples/blackjack.jpg"
+	chicken = new Image(736,640)
+	chicken.src = "img/examples/chicken.jpg"
+	chips = new Image(736,640)
+	chips.src = "img/examples/chips.jpg"
+	dice = new Image(736,640)
+	dice.src = "img/examples/dice.jpg"
+	eleven = new Image(736,640)
+	eleven.src = "img/examples/eleven.jpg"
+	holdem = new Image(736,640)
+	holdem.src = "img/examples/holdem.jpg"
+	roulette = new Image(736,640)
+	roulette.src = "img/examples/roulette.jpg"
+	royalflush = new Image(736,640)
+	royalflush.src = "img/examples/royalflush.jpg"
+	// Preload cards
+	ph = new Image(148,208)
+	ph.src = "img/ph.png"
+	c1 = new Image(148,208)
+	c1.src = "img/correct/1.png"
+	c2 = new Image(148,208)
+	c2.src = "img/correct/2.png"
+	c3 = new Image(148,208)
+	c3.src = "img/correct/3.png"
+	c4 = new Image(148,208)
+	c4.src = "img/correct/4.png"
+	c5 = new Image(148,208)
+	c5.src = "img/correct/5.png"
+	i1 = new Image(148,208)
+	i1.src = "img/incorrect/1.png"
+	i2 = new Image(148,208)
+	i2.src = "img/incorrect/2.png"
+	i3 = new Image(148,208)
+	i3.src = "img/incorrect/3.png"
+	i4 = new Image(148,208)
+	i4.src = "img/incorrect/4.png"
+	i5 = new Image(148,208)
+	i5.src = "img/incorrect/5.png"
+	o1 = new Image(148,208)
+	o1.src = "img/opponent/1.png"
+	o2 = new Image(148,208)
+	o2.src = "img/opponent/1.png"
+	o3 = new Image(148,208)
+	o3.src = "img/opponent/1.png"
+	o4 = new Image(148,208)
+	o4.src = "img/opponent/1.png"
+	o5 = new Image(148,208)
+	o5.src = "img/opponent/1.png"
+}
